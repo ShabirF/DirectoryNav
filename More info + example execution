@@ -1,0 +1,29 @@
+Given file path: C:\Users\username\IdeaProjects\untitled
+
+The user has the option to run the program with or without command-line arguments.
+
+Here are the following possible arguments:
+-c => running total of the number of files found
+-fc string => lists files containing the particular string within the file name.
+-contains string => lists files whose contents contain the given string
+
+Command-line arguments can be run in conjunction with one another.
+
+Example: Let's assume there are two files in a directory; one file named file1 contains the string "$6123" and another file, file2 includes the string "26". If the user entered the command-line arguments, "-fc file -contains
+$6," the program would first filter out the files with "file" in the file name as the string argument provided after -fc is "file." 
+
+RESULTING OUTPUT:
+.\file2
+
+Explanation: In this case, it would find the files with the string, "$6" in them. In this case only file2 matches
+that criteria so the output would be ".\file2".
+
+If no command-line arguments are provided then a listing of all the files is produced.
+
+Example: If the current directory contains the files, "text", "altText", "file1", "file2" the output would be as follows:
+
+RESULTING OUTPUT:
+.\text
+.\altText
+.\file1
+.\file2
