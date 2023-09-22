@@ -13,44 +13,10 @@ class StringSet {
                 aa[i] = dirFiles[i].getPath();
         }
     }
-    public StringSet(StringSet other) {
-        aa = new String[other.size()];
-        for (int i = 0; i < aa.length; i++)  {
-            aa[i] = other.aa[i];
-        }
-    }
-    public boolean equal(StringSet other) {
-        for (int i = 0; i < other.size(); i++) {
-            if (!aa[i].equals(other.aa[i]))
-                return false;
-        }
-        return true;
-    }
-    private void makenull(String[] ss) {
-        for (int i=0; i<ss.length; i++) ss[i] = null;
-    }
     public int size() {
         int count=0;
         for (int i = 0; i< aa.length; i++) if (aa[i]!=null) count++;
         return count;
-    }
-    private void grow() {
-        String[] newSS = new String[2* aa.length];
-        makenull(newSS);
-        for (int i = 0; i< aa.length; i++)
-            newSS[i] = aa[i];
-        aa = newSS;
-    }
-    public void add(String s) {
-        if (hasMember(s)) return;
-        for (int i = 0; i< aa.length; i++) {
-            if (aa[i]==null) {
-                aa[i] = s;
-                return;
-            }
-        }
-        grow();
-        add(s);
     }
     private int find(String s) {
         if (s==null)
@@ -64,7 +30,6 @@ class StringSet {
         return find(s)!=-1;
     }
     public void containsString(String s) {
-        System.out.println("The following files contain the matching string: ");
         for (int i = 0; i < aa.length; i++) {
             if (aa[i] != null && aa[i].contains(s)) {
                 System.out.println(aa[i]);
@@ -103,21 +68,6 @@ class StringSet {
         return theWord;
     }
 
-    public void delete(String s) {
-        int i=find(s);
-        if (i>=0) aa[i] = null;
-    }
-    public String select() {
-        if (isEmpty()) return null;
-        for (int i = 0; i< aa.length; i++)
-            if (aa[i]!=null) return aa[i];
-        return null;
-    }
-    public String selectAndRemove() {
-        String s = select();
-        delete(s);
-        return s;
-    }
     public boolean isEmpty() {
         return size()==0;
     }
@@ -139,10 +89,6 @@ class StringSet {
             System.out.println(aSet.size());
         else if (args.length == 2 && args[0].equals("-fc"))
             aSet.containsString(args[1]);
-        else if (args.length == 2 && args[0].equals("-c")) {
-            a = aSet.containsStringCount(args[1]);
-            System.out.println(a);
-        }
         else if (args.length == 3 && args[0].equals("-c") && args[1].equals("-fc")) {
             a = aSet.containsStringCount(args[2]);
             System.out.println(a);
@@ -153,5 +99,3 @@ class StringSet {
 
     }
 }
-
-
